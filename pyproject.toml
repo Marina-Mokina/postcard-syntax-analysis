@@ -1,0 +1,44 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "postcard-syntax-analyzer"
+version = "1.0.0"
+description = "Анализ синтаксической сложности текстов открыток (русский язык)"
+readme = "README.md"
+packages = [
+    { include = "postcard_syntax_analyzer", from = "backend/src" }
+]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.14"
+spacy = ">=3.8.0"
+pandas = ">=2.0.0"
+numpy = ">=1.24.0"
+fastapi = ">=0.115.0"
+uvicorn = ">=0.34.0"
+python-multipart = ">=0.0.20"
+
+[tool.poetry.group.dev.dependencies]
+ruff = ">=0.1.6"
+pre-commit = ">=3.0.0"
+pytest = ">=7.0.0"
+black = ">=23.0.0"
+
+[tool.poetry.scripts]
+postcard-api = "backend.service:main"
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "C", "N", "Q", "RSE", "RET", "SIM", "TID", "ARG", "PL", "RUF"]
+ignore = ["D100", "D104", "G004", "RUF001", "RUF002", "RUF003"]
+
+[tool.ruff.format]
+quote-style = "single"
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "single"

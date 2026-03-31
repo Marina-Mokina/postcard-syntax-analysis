@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анализ синтаксической сложности</title>
+    <link href="/static/styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Анализ синтаксической сложности</h1>
+        </header>
+        <main>
+            <div class="input-section">
+                <label for="text-input">Введите текст</label>
+                <textarea id="text-input" rows="5"></textarea>
+            </div>
+            <div class="radio-section">
+                <span class="radio-label">Режим вывода:</span>
+                <label class="radio-option">
+                    <input type="radio" name="mode" value="simple" checked>
+                    <span>Упрощенный (основные показатели)</span>
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="mode" value="full">
+                    <span>Полный (44 параметра)</span>
+                </label>
+            </div>
+            <button id="analyze-button">Проанализировать</button>
+            <div class="output-section">
+                <label for="text-output">Результат</label>
+                <textarea id="text-output" readonly rows="12" placeholder="Здесь появится результат..."></textarea>
+            </div>
+        </main>
+    </div>
+    <script src="/static/main.js"></script>
+</body>
+</html>
