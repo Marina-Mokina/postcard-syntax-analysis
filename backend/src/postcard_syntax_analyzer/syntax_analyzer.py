@@ -216,6 +216,22 @@ class TextParser:
             res.append(cnt)
         return res
 
+    def get_predicate_units_per_sentence(self) -> List[int]:
+        """The number of predicative units in each sentence according to Zolotova."""
+        self._parse()
+        if not self._sentences:
+            return [0]
+        clauses = self.get_clauses_raw()
+        participles = self.get_participles_per_sentence()
+        verbal_adverbs = self.get_verbal_adverbs_per_sentence()
+        infinitive_phrases = self.get_infinitive_phrases_per_sentence()
+
+        pu = []
+        for i in range(len(self._sentences)):
+            total = (clauses[i] + participles[i] + verbal_adverbs[i] + infinitive_phrases[i])
+            pu.append(total)
+        return pu
+
 
 class SyntaxStats:
     """
@@ -271,6 +287,11 @@ class SyntaxStats:
     def nmod_stats(self) -> Dict[str, float]:
         return self._stats(self.parser.get_nmod_count_per_sentence(), 'nmod')
 
+    def info_density_stats(self) -> Dict[str, float]:
+        """Information density statistics."""
+        values = self.parser.get_predicate_units_per_sentence()
+        return self._stats(values, 'info_density')
+
     def all_stats(self) -> Dict[str, float]:
         """Collect statistics for all features into one dictionary."""
         stats = {}
@@ -285,6 +306,7 @@ class SyntaxStats:
         stats.update(self.ccomp_stats())
         stats.update(self.infinitive_phrases_stats())
         stats.update(self.nmod_stats())
+        stats.update(self.info_density_stats())
         return stats
 
 
